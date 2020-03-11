@@ -10,4 +10,7 @@ def to_date():
     h = h - (24 * d)
     z = f'{d}d:{h}h:{m}m:{s}s'
     return z
-print(to_date())
+
+
+if __name__ == "__main__":
+    to_date()
