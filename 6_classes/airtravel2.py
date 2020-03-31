@@ -20,12 +20,14 @@ class Flight:
         rows, seats = self._aircraft.seating_plan()
         self._seating = [None] + [{letter: None for letter in seats} for _ in rows]
 
-
     def number(self):
         return self._number
 
     def airline(self):
         return self._number[:2]
+
+    def route_number(self):
+        return self._number[2:]
 
     def aircraft_model(self):
         return self._aircraft.model()
@@ -59,6 +61,30 @@ class Flight:
             raise ValueError("Seat {} is already occupied".format(seat))
 
         self._seating[row][letter] = passenger
+
+    def free_seat(self, seat, passenger):
+        """Free seat from a passenger.
+
+        Args:
+            seat: A seat designator such as '12C' or '21B'.
+            passenger: The passenger name.
+
+        Raises:
+            ValueError: if the seat is free or allocated not for this passenger.
+        """
+        pass
+
+    def move_seat(self, old_seat, new_seat):
+        """Move passenger from one seat to another.
+
+        Args:
+            old_seat: A seat designator such as '12C' or '21B'.
+            new_seat: A seat designator we move the passenger.
+
+        Raises:
+            ValueError: if the old_seat is free or new_seat is occupied.
+        """
+        pass
 
 
 class Aircraft:
