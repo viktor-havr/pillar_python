@@ -1,6 +1,9 @@
 """Model for Aircraft flights"""
 
 
+__all__ = ['Flight', 'Aircraft']
+
+
 class Flight:
     """A flight with a particular passenger aircraft"""
 
@@ -92,8 +95,10 @@ class Flight:
         if self._seating[row][letter] is None:
             raise ValueError("Seat {} is already free".format(seat))
 
-        self._seating[row][letter] = None
-
+        if self._seating[row][letter] == passenger:
+            self._seating[row][letter] = None
+        else:
+            raise ValueError(f"Seat {seat} is occupied not by {passenger}")
 
     def move_seat(self, old_seat, new_seat):
         """Move passenger from one seat to another.
@@ -126,3 +131,13 @@ class Aircraft:
         return (range(1, self._num_rows + 1),
                 "ABCDEFGHJK"[:self._num_seats_per_row])
 
+    def all_info(self):
+        return self._registration, self._model, self._num_rows
+
+
+f = Flight("QR277", Aircraft("G-EUPT", "Airbus A319", num_rows=22, num_seat_per_row=6))
+f.allocate_seat('5B', 'Petro')
+a, b, c = f._aircraft.all_info()
+print(a)
+print(b)
+print(c)
