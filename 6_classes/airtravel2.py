@@ -105,3 +105,15 @@ class Aircraft:
         return (range(1, self._num_rows + 1),
                 "ABCDEFGHJK"[:self._num_seats_per_row])
 
+
+class Boeng(Aircraft):
+
+    def __init__(self, *args, engines=4):
+        print(args)
+        super(Boeng, self).__init__(*args)
+        self._num_engines = engines
+        self._weight = 15000
+
+    def water_landing(self):
+        print("Success! We landed to water!")
+
